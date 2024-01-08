@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            ROCK-PAPER-SCISSORS
+        </title>
+        <link rel="stylesheet" href="rock-paper-scissors.css">
+
+    </head>
+
+    <body>
+
+       <p class="welcome-heading"> ROCK - PAPER - SCISSORS</p>
+
+</div>
+
+<div class="js-play-container">
+
+<div class="moves">
+
+    <button class="rock-button" onclick="
+    userMove='Rock';
+    pickComputerMove();
+    resultCalculate();
+    displayResult();
+    ">
+    <div class="move-image-container">
+        <img class="move-image" src="Rock.png">
+    </div>
+    <div class="move-text">
+        Rock
+    </div>
+    
+    </button>
+
+    <button class="paper-button" onclick="
+    userMove='Paper';
+    pickComputerMove();
+    resultCalculate();
+    displayResult();
+    ">
+    <div class="move-image-container">
+        <img class="move-image" src="Paper.png">
+    </div>
+    <div class="move-text">
+        Paper
+    </div>
+    </button>
+
+    <button class="scissors-button" onclick="
+    userMove='Scissors';
+    pickComputerMove();
+    resultCalculate();
+    displayResult();
+    ">
+    <div class="move-image-container">
+        <img class="move-image" src="Scissors.png">
+    </div>
+    <div class="move-text">
+        Scissors
+    </div>
+    </button>
+</div>
+    
+
+        <p class="js-pick">Pick a Move!</p>
+        <button class="js-result"></button>
+        <p class="js-play-again"></p>
+        <div class="js-scoresheet"></div>
+        
+        
+
+        <button class="reset-button" onclick="resetScore();
+        displayResult();">Reset Score</button>
+</div>
+
+       <script>
+           
+           let userMove,computerMove;
+            let result;
+
+            const score={
+                wins:0,
+                losses:0,
+                ties:0
+            };
+
+            function pickComputerMove()
+            {
+                let pickComputerValue=Math.random();
+
+                if(pickComputerValue<1/3)
+                {
+                    computerMove='Rock';
+                }
+
+                else if(pickComputerValue<2/3 && pickComputerValue>1/3)
+                {
+                    computerMove='Paper';
+                }
+
+                else if(pickComputerValue<1 && pickComputerValue>2/3)
+                {
+                    computerMove='Scissors';
+                }
+
+            }
+
+                function resultCalculate()
+                {
+                    if(userMove==='Rock')
+                    {
+                        if(computerMove==='Scissors')
+                        {
+                            score.wins++;
+                            result='You won';
+                        }
+                        else if(computerMove==='Paper')
+                        {
+                            score.losses++;
+                            result='You Lost';
+                        }
+
+                        else if(computerMove==='Rock')
+                        {
+                            score.ties++;
+                            result=`It's a Tie`;
+                        }
+                    }
+
+                    else if(userMove==='Paper')
+                    {
+                        if(computerMove==='Scissors')
+                        {
+                            score.losses++;
+                            result='You Lost';
+                        }
+                        else if(computerMove==='Paper')
+                        {
+                            score.ties++;
+                            result=`It's a Tie`;
+                        }
+
+                        else if(computerMove==='Rock')
+                        {
+                            score.wins++;
+                            result='You Won';
+                        }
+                    }
+
+                    else if(userMove==='Scissors')
+                    {
+                        if(computerMove==='Scissors')
+                        {
+                            score.ties++;
+                            result`It's a Tie`;
+                        }
+
+                        else if(computerMove==='Paper')
+                        {
+                            score.wins++;
+                            result='Your Won';
+                        }
+
+                        else if(computerMove==='Rock')
+                        {
+                            score.losses++;
+                            result='You Lost';
+                        }
+                    }
+                }
+
+                function displayResult()
+                {
+                    document.querySelector('.js-pick').innerHTML=`
+                    <div class="js-battlecard">
+                        <div class="your-move">
+                            <div class="your-move-text">
+                                Your Move
+                            </div>
+                            
+                            <img class="your-move-photo" src="${userMove}.png">
+                        </div>
+                   
+
+                        <div class="vs">
+                            V/S
+                        </div>
+
+                        <div class="computer-move">
+                            <div class="computer-move-text">
+                                Computer Move
+                            </div>
+
+                            <img class="computer-move-photo" src="${computerMove}.png">
+                        </div>
+                    </div>`
+                        
+                    document.querySelector('.js-scoresheet').innerHTML=`
+                    <div class="stats">
+                        STATS
+                        <div class="wins">
+                            Wins = ${score.wins}
+                        </div>
+                        <div class="losses">
+                            Losses = ${score.losses}
+                        </div>
+                        <div class="ties">
+                            Ties = ${score.ties}
+                        </div>
+                    </div>
+        `;
+                    document.querySelector('.js-result').innerHTML=`${result}!`;
+                }
+
+                function resetScore()
+                {
+                    score.wins=0;
+                    score.losses=0;
+                    score.ties=0;
+                }
+
+
+                
+
+
+            
+
+       </script>
+    </body>
+</html>
